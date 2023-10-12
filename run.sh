@@ -1,3 +1,3 @@
 #!/bin/bash
 
-node ./server/index.ts
+ts-node --esm ./server/index.ts
