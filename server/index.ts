@@ -35,4 +35,10 @@ const hashtest = async function() {
   console.log("comparison to different password: " + comp2);
 }
 
+const body = {email: "example@mail.com", password: "pswd"}
+dbModel.createUser(body).then(result => { console.log(result)}).then(()=> {
+  dbModel.getPassword(body.email).then((result: any)=> { console.log(result.password)})
+  .then(() => {dbModel.setPassword({email: 'test@test.com', newPwd: 'ddddd'})});
+});
+
 hashtest();
