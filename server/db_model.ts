@@ -101,6 +101,18 @@ const createUser = (body: {email: string, password: string}) => {
   });
 }
 
+const getUser = (email: string) => {
+  return new Promise(function(resolve, reject) {
+    pool.query(`SELECT * FROM users where email = $1`, 
+      [email], (error, results) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(results.rows[0]);
+      });
+  });
+}
+
 const deleteUser = (email: string) => {
   return new Promise(function(resolve, reject) {
     pool.query(`DELETE FROM users WHERE email = $1 RETURNING *`, 
@@ -143,7 +155,8 @@ export {
   createUser,
   deleteUser,
   getPassword,
-  setPassword
+  setPassword,
+  getUser
 }
 
 
