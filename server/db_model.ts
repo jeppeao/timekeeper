@@ -1,6 +1,13 @@
 
 import * as env from "./env";
 import * as pg from 'pg';
+
+interface Userdata {
+  user_id: number,
+  email: string,
+  password: string
+}
+
 const { Pool } = pg;
 
 const pool = new Pool({
@@ -101,14 +108,14 @@ const createUser = (body: {email: string, password: string}) => {
   });
 }
 
-const getUser = (email: string) => {
+const getUser = (email: string): Promise<Userdata> => {
   return new Promise(function(resolve, reject) {
     pool.query(`SELECT * FROM users where email = $1`, 
       [email], (error, results) => {
         if (error) {
           reject(error);
         }
-        resolve(results.rows[0]);
+        resolve(results.rows[0] as Userdata);
       });
   });
 }
@@ -151,6 +158,7 @@ const setPassword = (body: {email: string, newPwd:string}) => {
 }
 
 export {
+  Userdata,
   setupTables,
   createUser,
   deleteUser,

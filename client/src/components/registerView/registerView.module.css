@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
+input {
+  width: 200px;
+  margin-bottom: 12px;
+}
